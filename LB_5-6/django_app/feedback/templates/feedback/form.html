@@ -1,0 +1,36 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}Форма{% endblock %}
+
+{% block content %}
+    <h1>Зворотний зв'язок</h1>
+
+    {% if messages %}
+        <ul style="color: green;">
+            {% for msg in messages %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                <label>{{ field.label }}</label><br>
+                {{ field }}
+                {% if field.errors %}
+                    <ul style="color: red;">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <br>
+        {% endfor %}
+
+        <button type="submit">Надіслати</button>
+    </form>
+{% endblock %}

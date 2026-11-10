@@ -1,0 +1,19 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ page_title|upper }}</h1>
+
+    <p>Кількість користувачів: {{ active_users }}</p>
+
+    {% if news_items %}
+        <ul>
+            {% for item in news_items %}
+                <li>{{ item|truncatewords:2 }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Немає новин.</p>
+    {% endif %}
+{% endblock %}
